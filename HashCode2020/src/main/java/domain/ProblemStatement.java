@@ -41,4 +41,14 @@ public class ProblemStatement {
     public void setLibraryList(List<Library> libraryList) {
         this.libraryList = libraryList;
     }
+
+    @Override
+    public String toString() {
+        return "ProblemStatement{" +
+                "totalNumberOfBooks=" + totalNumberOfBooks +
+                ", totalNumberOfLibraries=" + totalNumberOfLibraries +
+                ", totalNumberOfScanningDays=" + totalNumberOfScanningDays +
+                ", libraryList=" + libraryList +
+                '}';
+    }
 }
