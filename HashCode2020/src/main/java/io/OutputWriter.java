@@ -1,5 +1,6 @@
 package main.java.io;
 
+import main.java.domain.Book;
 import main.java.domain.Library;
 import main.java.domain.Solution;
 
@@ -20,7 +21,18 @@ public class OutputWriter {
             printWriter.flush();
 
             for(Library library : solution.libraries) {
-                String line = library.getId() +
+                String line = library.getId() + " " + library.getBooksToScan().size();
+                printWriter.print("\n" + line);
+                printWriter.flush();
+
+                StringBuilder books = new StringBuilder();
+
+                for(Book book : library.getBooksToScan()) {
+                    books.append(book.getBookId() + " ");
+                }
+
+                printWriter.print("\n" + books.toString());
+                printWriter.flush();
             }
 
         } catch (IOException e) {

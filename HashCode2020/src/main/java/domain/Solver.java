@@ -12,7 +12,7 @@ public class Solver {
         this.problemStatement = problemStatement;
     }
 
-    public void solve() {
+    public Solution solve() {
         Solution solution = new Solution();
 
         Integer currentNumberOfDays = 0;
@@ -29,6 +29,8 @@ public class Solver {
                 library.determineBooksToBeScanned(currentNumberOfDays, this.problemStatement.getTotalNumberOfScanningDays());
             }
         }
+
+        return solution;
     }
 
     public LinkedHashMap<Library, Integer> determineHighYieldLibraries() {

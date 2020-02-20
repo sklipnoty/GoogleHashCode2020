@@ -1,9 +1,7 @@
 package main.java.domain;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import javax.swing.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Library {
@@ -15,7 +13,7 @@ public class Library {
     private Integer totalPossibleScore;
     private Integer highsterScoringBook;
 
-    private List<Book> booksToScan;
+    private List<Book> booksToScan = new ArrayList<>();
 
     public List<Book> getBookList() {
         return bookList;
@@ -95,10 +93,20 @@ public class Library {
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
 
-        while(currentNumberOfDays < maxNumberOfDays) {
-            for(int i = 0; i < this.getNumberOfBooksToShip(); i++) {
-                //reverseSortedMap.keySet()
-            }
+        List<Book> aList = new ArrayList<Book>(reverseSortedMap.keySet());
+        int currentBookIndex = 0;
+
+        Float totalNumberOfDaysLeftOver = Float.valueOf(maxNumberOfDays - currentNumberOfDays);
+
+        if(this.getNumberOfBooksToShip() > totalNumberOfDaysLeftOver) {
+            totalNumberOfDaysLeftOver = Float.valueOf(this.getNumberOfBooksToShip());
+        } else {
+            totalNumberOfDaysLeftOver *= this.getNumberOfBooksToShip();
         }
+
+        float maxIndex = Math.min(totalNumberOfDaysLeftOver, this.bookList.size());
+
+        this.booksToScan.addAll(aList.subList(0, (int) maxIndex));
+        System.out.println("Library " + getId() + " " + this.booksToScan.size());
     }
 }

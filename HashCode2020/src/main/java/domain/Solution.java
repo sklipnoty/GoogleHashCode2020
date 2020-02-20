@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Solution {
 
-    public Integer numberOfLibrariesToSignUp;
+    public Integer numberOfLibrariesToSignUp = new Integer(0);
     public List<Library> libraries = new ArrayList<>();
 
     public Solution() {}

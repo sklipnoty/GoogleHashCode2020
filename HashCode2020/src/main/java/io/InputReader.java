@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputReader {
@@ -38,6 +39,9 @@ public class InputReader {
             for(int i = 2; i < lines.size()-2; i=i+2) {
                 String[] firstLibLine = lines.get(i).split(" ");
                 String[] secondLibLine = lines.get(i+1).split(" ");
+
+                System.out.println(Arrays.deepToString(firstLibLine));
+                System.out.println(Arrays.deepToString(secondLibLine));
 
                 Library library = new Library();
                 library.setNumberOfBooksToShip(Integer.valueOf(firstLibLine[2]));
