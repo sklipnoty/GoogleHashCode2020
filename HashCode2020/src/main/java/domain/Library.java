@@ -13,7 +13,7 @@ public class Library {
     private Integer totalPossibleScore;
     private Integer highsterScoringBook;
 
-    private Integer heuristicNumber;
+    private Double heuristicNumber;
     private Integer uniqueNessFactor;
 
     private List<Book> booksToScan = new ArrayList<>();
@@ -74,11 +74,11 @@ public class Library {
         this.id = id;
     }
 
-    public Integer getHeuristicNumber() {
+    public Double getHeuristicNumber() {
         return heuristicNumber;
     }
 
-    public void setHeuristicNumber(Integer heuristicNumber) {
+    public void setHeuristicNumber(Double heuristicNumber) {
         this.heuristicNumber = heuristicNumber;
     }
 

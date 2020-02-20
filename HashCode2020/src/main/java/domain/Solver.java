@@ -14,12 +14,17 @@ public class Solver {
         Solution solution = new Solution();
 
         Integer currentNumberOfDays = 0;
-        LinkedHashMap<Library, Integer> sortedByHighestValueBooks = determineHighYieldLibraries();
+        LinkedHashMap<Library, Double> sortedByHighestValueBooks = determineHighYieldLibraries();
         Set<Book> alreadyScanned = new HashSet<>();
+
 
         for(Library library : sortedByHighestValueBooks.keySet()) {
 
-            if(currentNumberOfDays < this.problemStatement.getTotalNumberOfScanningDays() &&  currentNumberOfDays + library.getSignUpDuration() < this.problemStatement.getTotalNumberOfScanningDays() ) {
+            if(Math.random() > 0.95) {
+                continue;
+            }
+
+            if(currentNumberOfDays < this.problemStatement.getTotalNumberOfScanningDays() && currentNumberOfDays + library.getSignUpDuration() < this.problemStatement.getTotalNumberOfScanningDays() ) {
                 currentNumberOfDays += library.getSignUpDuration();
                 solution.numberOfLibrariesToSignUp += 1;
                 solution.libraries.add(library);
@@ -34,7 +39,7 @@ public class Solver {
         return solution;
     }
 
-    public LinkedHashMap<Library, Integer> determineHighYieldLibraries() {
+    public LinkedHashMap<Library, Double> determineHighYieldLibraries() {
 
         Set<Book> allBooks = new HashSet<>();
 
@@ -78,7 +83,7 @@ public class Solver {
             double h1 = averageScore / library.getSignUpDuration();
             double h2 = totalScore / library.getSignUpDuration();
             double h3 = library.getBookList().size() / library.getSignUpDuration();
-            double h4 = library.getUniqueNessFactor() / library.getSignUpDuration();
+            double h4 = totalScore + averageScore + library.getBookList().size()  / library.getSignUpDuration();
 
             Random r = new Random();
 
@@ -87,17 +92,16 @@ public class Solver {
             double x3 = 0 + ((1-x1-x2) - 0) * r.nextDouble();
             double x4 = 1 - x1 - x2 - x3;
 
-          //  System.out.println(x1 + " " + x2 + " " +x3+ " " + x4);
-
-            int allH = (int) (x1 * h1 +x2 * h2 + x3 * h3 + x4* h4);
+            double allH = (h1 + h2);
+            //System.out.println(allH);
 
             library.setHeuristicNumber(allH);
         }
 
-        Map<Library,Integer> mapping = this.problemStatement.getLibraryList().stream().collect(Collectors.toMap(x->x, x->x.getHeuristicNumber()));
+        Map<Library,Double> mapping = this.problemStatement.getLibraryList().stream().collect(Collectors.toMap(x->x, x->x.getHeuristicNumber()));
 
         //LinkedHashMap preserve the ordering of elements in which they are inserted
-        LinkedHashMap<Library, Integer> reverseSortedMap = new LinkedHashMap<>();
+        LinkedHashMap<Library, Double> reverseSortedMap = new LinkedHashMap<>();
 
         mapping.entrySet()
                 .stream()
@@ -106,5 +110,4 @@ public class Solver {
 
         return reverseSortedMap;
     }
-
 }

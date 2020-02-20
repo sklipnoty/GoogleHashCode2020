@@ -14,20 +14,18 @@ public class StartUp {
         //ProblemStatement problemStatement = inputReader.readProblemStatement();
 
         ArrayList<String> inputs = new ArrayList<>();
-        inputs.add("input/a_example.txt");
-        inputs.add("input/b_read_on.txt");
-        inputs.add("input/c_incunabula.txt");
-        inputs.add("input/d_tough_choices.txt");
+       // inputs.add("input/a_example.txt");
+      //  inputs.add("input/b_read_on.txt");
+      //  inputs.add("input/c_incunabula.txt");
+       // inputs.add("input/d_tough_choices.txt");
         inputs.add("input/e_so_many_books.txt");
-        inputs.add("input/f_libraries_of_the_world.txt");
+      //  inputs.add("input/f_libraries_of_the_world.txt");
 
         for(String input : inputs) {
             System.out.println("Solving " + input);
-
-
             int maxScore = 0;
 
-            for(int i = 0; i < 1000; i++) {
+            for(int i = 0; i < 5000; i++) {
                 ProblemStatement problemStatement = inputReader.readProblemStatement(input);
 
                 Solver solver = new Solver(problemStatement);
@@ -42,6 +40,7 @@ public class StartUp {
                 }
 
                 if(score > maxScore) {
+                    System.out.println(score);
                     OutputWriter outputWriter = new OutputWriter();
                     String[] output = input.split("/");
                     outputWriter.writeOutput(output[1], sol);
