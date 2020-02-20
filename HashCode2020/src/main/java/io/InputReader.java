@@ -33,8 +33,9 @@ public class InputReader {
 
             String[] secondLine = lines.get(1).split(" ");
             List<Library> libraries = new ArrayList<>();
+            int libraryId = 0;
 
-            for(int i = 2;i < lines.size(); i=i+2) {
+            for(int i = 2; i < lines.size()-2; i=i+2) {
                 String[] firstLibLine = lines.get(i).split(" ");
                 String[] secondLibLine = lines.get(i+1).split(" ");
 
@@ -43,6 +44,7 @@ public class InputReader {
                 library.setSignUpDuration(Integer.valueOf(firstLibLine[1]));
                 Integer numberOfBooksInLib = Integer.valueOf(firstLibLine[0]);
                 List<Book> books = new ArrayList<>();
+                library.setId(libraryId);
 
                 for(int j = 0; j < numberOfBooksInLib; j++) {
                     Book book = new Book();
@@ -53,6 +55,7 @@ public class InputReader {
 
                 library.setBookList(books);
                 libraries.add(library);
+                libraryId += 1;
             }
 
             problemStatement.setLibraryList(libraries);
