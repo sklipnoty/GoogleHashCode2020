@@ -1,8 +1,6 @@
 package main.java;
 
-import main.java.domain.ProblemStatement;
-import main.java.domain.Solution;
-import main.java.domain.Solver;
+import main.java.domain.*;
 import main.java.io.InputReader;
 import main.java.io.OutputWriter;
 
@@ -24,15 +22,34 @@ public class StartUp {
         inputs.add("input/f_libraries_of_the_world.txt");
 
         for(String input : inputs) {
-            ProblemStatement problemStatement = inputReader.readProblemStatement(input);
-            Solver solver = new Solver(problemStatement);
-            Solution sol = solver.solve();
+            System.out.println("Solving " + input);
 
-            OutputWriter outputWriter = new OutputWriter();
 
-            String[] output = input.split("/");
+            int maxScore = 0;
 
-            outputWriter.writeOutput(output[1], sol);
+            for(int i = 0; i < 1000; i++) {
+                ProblemStatement problemStatement = inputReader.readProblemStatement(input);
+
+                Solver solver = new Solver(problemStatement);
+                Solution sol = solver.solve();
+
+                int score = 0;
+
+                for(Library library : sol.libraries) {
+                    for(Book book : library.getBooksToScan()) {
+                        score += book.getScore();
+                    }
+                }
+
+                if(score > maxScore) {
+                    OutputWriter outputWriter = new OutputWriter();
+                    String[] output = input.split("/");
+                    outputWriter.writeOutput(output[1], sol);
+                    maxScore = score;
+                }
+            }
+
+            System.out.println(maxScore);
         }
     }
 }

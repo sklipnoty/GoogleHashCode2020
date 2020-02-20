@@ -40,8 +40,8 @@ public class InputReader {
                 String[] firstLibLine = lines.get(i).split(" ");
                 String[] secondLibLine = lines.get(i+1).split(" ");
 
-                System.out.println(Arrays.deepToString(firstLibLine));
-                System.out.println(Arrays.deepToString(secondLibLine));
+        //        System.out.println(Arrays.deepToString(firstLibLine));
+        //        System.out.println(Arrays.deepToString(secondLibLine));
 
                 Library library = new Library();
                 library.setNumberOfBooksToShip(Integer.valueOf(firstLibLine[2]));
